@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.alura.aluraesporte.R
 import br.com.alura.aluraesporte.ui.recyclerview.adapter.ProdutosAdapter
+import br.com.alura.aluraesporte.ui.viewmodel.LoginViewModel
 import br.com.alura.aluraesporte.ui.viewmodel.ProdutosViewModel
 import kotlinx.android.synthetic.main.lista_produtos.*
 import org.koin.android.ext.android.inject
@@ -21,6 +22,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListaProdutosFragment : Fragment() {
 
+    private val loginViewModel: LoginViewModel by viewModel()
     private val viewModel: ProdutosViewModel by viewModel()
     private val adapter: ProdutosAdapter by inject()
     private val controlador by lazy {
@@ -29,8 +31,15 @@ class ListaProdutosFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        verificaEstaLogado()
         setHasOptionsMenu(true)
         buscaProdutos()
+    }
+
+    private fun verificaEstaLogado() {
+        if (loginViewModel.naoestaLogado()) {
+            vaiParaLogin()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -40,10 +49,15 @@ class ListaProdutosFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(item?.itemId == R.id.menu_lista_produtos_deslogar){
-            val direcao = ListaProdutosFragmentDirections.acaoListaProdutosParaLogin()
-            controlador.navigate(direcao)
+            loginViewModel.desloga()
+            vaiParaLogin()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun vaiParaLogin() {
+        val direcao = ListaProdutosFragmentDirections.acaoListaProdutosParaLogin()
+        controlador.navigate(direcao)
     }
 
 
