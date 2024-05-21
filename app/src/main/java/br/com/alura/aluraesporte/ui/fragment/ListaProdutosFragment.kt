@@ -32,6 +32,8 @@ class ListaProdutosFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         buscaProdutos()
+        requireActivity().title = "Lista de produtos"
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
