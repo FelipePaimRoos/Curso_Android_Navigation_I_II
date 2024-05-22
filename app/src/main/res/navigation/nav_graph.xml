@@ -63,6 +63,9 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/acao_login_para_cadastroUsuario"
+            app:destination="@id/cadastroUsuario" />
     </fragment>
     <action
         android:id="@+id/acao_global_login"
@@ -73,4 +76,9 @@
         app:popExitAnim="@anim/nav_default_pop_exit_anim"
         app:popUpTo="@id/listaProdutos"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/cadastroUsuario"
+        android:name="br.com.alura.aluraesporte.ui.fragment.CadastroUsuarioFragment"
+        android:label="Cadastro de usuário"
+        tools:layout="@layout/cadastro_usuario"/>
 </navigation>
