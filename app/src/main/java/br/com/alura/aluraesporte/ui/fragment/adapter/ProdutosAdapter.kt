@@ -1,4 +1,4 @@
-package br.com.alura.aluraesporte.ui.recyclerview.adapter
+package br.com.alura.aluraesporte.ui.fragment.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
